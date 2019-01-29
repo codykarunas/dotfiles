@@ -3,16 +3,13 @@
 # $ZDOTDIR/.zshrc
 # $ZDOTDIR/.zlogin
 # $ZDOTDIR/.zlogout
- 
-source $HOME/.dotfiles/.zshrc
-source $HOME/.dotfiles/.aliases
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export PROMPT="%m %c % $ "
+export PROMPT="%{$fg[white]%}%m%{$reset_color%} %{$fg[white]%}%c%{$reset_color%} % $ "
 
 # color term
 export CLICOLOR=1
@@ -32,3 +29,5 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
 zstyle ':completion:*:ssh:*' tag-order hosts users
 zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+
+export PATH="$HOME/.cargo/bin:$PATH"

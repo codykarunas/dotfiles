@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo `ln -s ~/.dotfiles/.bashrc ~/`
+echo `ln -s ~/.dotfiles/.bash_profile ~/`
 echo `ln -s ~/.dotfiles/.gitconfig ~/`
 echo `ln -s ~/.dotfiles/.hushlogin ~/`
 echo `ln -s ~/.dotfiles/.railsrc ~/`

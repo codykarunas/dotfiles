@@ -4,6 +4,8 @@ syntax on
 
 " Vim-plug
 call plug#begin()
+Plug 'valloric/youcompleteme'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
@@ -13,12 +15,36 @@ Plug 'mxw/vim-jsx'
 Plug 'isruslan/vim-es6'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdtree'
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
+Plug 'nanotech/jellybeans.vim'
+Plug 'alessandroyorba/despacio'
+Plug 'guns/jellyx.vim'
 call plug#end()
 
 let g:ycm_confirm_extra_conf = 0
 
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ 'enable': {
+      \   'tabline': 0
+      \ }
+      \ }
+
+" let g:despacio_Pitch = 1
+let g:jellybeans_overrides = {
+      \    'background': { 'guibg': '000000' },
+      \}
+
 if has("gui_running")
+  color jellybeans
+  set cursorline
   set guifont=IBM\ Plex\ Mono:h14
   set guioptions-=m  " remove menu bar
   set guioptions-=T  " remove toolbar
@@ -29,7 +55,11 @@ if has("gui_running")
   set bg=dark
 else
   color delek
-  hi VertSplit ctermbg=236 ctermfg=236
+  set cursorline
+  hi LineNr ctermfg=245 cterm=NONE
+  hi Cursorline ctermbg=233 cterm=NONE
+  hi StatusLine ctermbg=235 ctermfg=248
+  " hi VertSplit ctermbg=236 ctermfg=236
   hi TabLineSel ctermfg=234 ctermbg=250
   hi TabLine ctermbg=234 ctermfg=250 cterm=NONE
   hi TabLineFill ctermbg=234 cterm=NONE
@@ -38,6 +68,7 @@ else
 endif
 
 " Settings
+set backspace=indent,eol,start
 set noswapfile
 set rtp+=/usr/local/opt/fzf
 set nu
@@ -46,9 +77,11 @@ set autoindent
 set smartindent
 set laststatus=2
 set synmaxcol=500
-set showtabline=2
+" set showtabline=2
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set t_ti=
+" set t_te=
 
 " Typos
 command! W W
@@ -70,12 +103,11 @@ let mapleader = ","
 nmap <leader>t :tabnew<CR>
 nmap <leader>c :tabclose<CR>
 
-" Kebinds
 imap <C-c> <Esc>
 nmap <C-p> :FZF<CR>
-nmap <C-b> :buffers<CR>
+nmap <C-b> :Buffers<CR>
+nmap <C-g> :GitGutterToggle<CR>
 
-" Laziness
 nnoremap ; :
 
 " Moving lines (Discovered: Apr 27, 2018)
@@ -129,30 +161,3 @@ autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-
-" REF: https://gabri.me/blog/diy-vim-statusline
-function! ReadOnly()
-  if &readonly || !&modifiable
-    return ''
-  else
-    return ''
-endfunction
-
-function! GitInfo()
-  let git = fugitive#head()
-  if git != ''
-    return ' '.fugitive#head()
-  else
-    return ''
-endfunction
-
-set laststatus=2
-set statusline=
-set statusline+=%8*\ [%n]                                " buffernr
-set statusline+=%8*\ %{GitInfo()}                        " Git Branch name
-set statusline+=%8*\ %<%t
-set statusline+=%*
-set statusline+=%9*\ %=                                  " Space
-set statusline+=%8*\ %y\                                 " FileType
-" set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
-set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (

@@ -1,0 +1,50 @@
+[user]
+  name = Cody Karunas
+  email = codykarunas@gmail.com
+
+[core]
+  editor = vim
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = ~/.gitignore
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = yellow bold
+  local = green bold
+  remote = cyan bold
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+
+[color "status"]
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
+
+[alias]
+  # add aliases
+  a = add --all
+
+  # status aliases
+  s = status
+
+  # branch aliases
+  b = branch
+
+  # commit aliases
+  c = commit
+  ca = commit -a
+  cm = commit -m
+
+  # clone aliases
+  cl = clone
+
+  # log aliases
+  l = log --pretty=oneline
+  lg = log --oneline --graph --decorate

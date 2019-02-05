@@ -15,6 +15,16 @@ export HISTCONTROL=erasedups
 export CLICOLOR=1
 export LSCOLORS=Exgxcxdxbxegedabagacad
 
+# set variable identifying the chroot you work in (used the prompt below)
+# if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+#   debian_chroot=$(cat /etc/debian_chroot)
+# fi
+
+case "$TERM" in
+  xterm-color|*-256color) color_prompt=yes;;
+esac
+
+
 function _update_ps1() {
   PS1=$(powerline-shell $?)
 }

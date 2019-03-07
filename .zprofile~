@@ -4,3 +4,4 @@
 # $ZDOTDIR/.zlogin
 # $ZDOTDIR/.zlogout
 
+source $HOME/.zshrc

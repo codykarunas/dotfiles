@@ -3,6 +3,10 @@
 export PATH=$PATH:/usr/local/bin
 
 export PATH=$HOME/.rbenv/bin:$PATH
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+echo 'export PATH="/usr/local/opt/ncurses/bin:$PATH"' >> ~/.bash_profile
+  # export LDFLAGS="-L/usr/local/opt/ncurses/lib"
+# export CPPFLAGS="-I/usr/local/opt/ncurses/include"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH=$HOME/.cargo/bin:$PATH
 # export PATH="/usr/local/opt/ruby/bin:$PATH"

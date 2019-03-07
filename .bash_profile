@@ -17,3 +17,5 @@ source $HOME/.bashrc
 # if [ -d "$HOME/.local/bin" ] ; then
 #   PATH="$HOME/.local/bin:$PATH"
 # fi
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+export PATH="/usr/local/opt/ncurses/bin:$PATH"

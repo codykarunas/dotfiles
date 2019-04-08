@@ -11,12 +11,12 @@
   ui = auto
 
 [color "branch"]
-  current = yellow bold
+  current = red bold
   local = green bold
   remote = cyan bold
 
 [color "diff"]
-  meta = yellow bold
+  meta = red bold
   frag = magenta bold
   old = red bold
   new = green bold
@@ -24,8 +24,8 @@
 
 [color "status"]
   added = green bold
-  changed = yellow bold
-  untracked = red bold
+  changed = red bold
+  untracked = magenta bold
 
 [alias]
   # add aliases

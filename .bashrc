@@ -1,16 +1,8 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export PATH=$PATH:/usr/local/bin
-
 export PATH=$HOME/.rbenv/bin:$PATH
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-echo 'export PATH="/usr/local/opt/ncurses/bin:$PATH"' >> ~/.bash_profile
-  # export LDFLAGS="-L/usr/local/opt/ncurses/lib"
-# export CPPFLAGS="-I/usr/local/opt/ncurses/include"
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-# export PATH=$HOME/.cargo/bin:$PATH
-# export PATH="/usr/local/opt/ruby/bin:$PATH"
-# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -18,11 +10,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export HISTCONTROL=erasedups
 export CLICOLOR=1
 export LSCOLORS=Exgxcxdxbxegedabagacad
-
-# set variable identifying the chroot you work in (used the prompt below)
-# if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-#   debian_chroot=$(cat /etc/debian_chroot)
-# fi
 
 case "$TERM" in
   xterm-color|*-256color) color_prompt=yes;;
@@ -45,6 +32,7 @@ if [ -t 1 ]; then
   bind '"\C-q": "%-\n"'
 fi
 
+alias vim="/usr/local/bin/nvim"
 alias .="source"
 alias ..="cd .."
 alias ll="ls -al"
@@ -53,6 +41,7 @@ alias tas="tmux attach-session"
 alias da="tmux detach"
 alias grep="grep --color"
 alias pgstart="postgres -D /usr/local/var/postgres"
+alias gst="git status"
 
 # rails aliases
 alias be="bundle exec"

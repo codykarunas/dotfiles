@@ -61,10 +61,12 @@ let g:gitgutter_enabled = 0
 " let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1 "Not working ??"
 " let g:ycm_autoclose_preview_window_after_completion=1
-let g:jellybeans_overrides = {
-\    'background': { 'guibg': '000000' },
-\}
-color jellybeans
+" let g:jellybeans_overrides = {
+" \    'background': { 'guibg': '000000' },
+" \}
+" color jellybeans
+color hybrid
+set bg=dark
 
 if has("gui_running")
   set guifont=IBM\ Plex\ Mono\ Text:h16

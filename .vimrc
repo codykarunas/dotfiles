@@ -48,11 +48,11 @@ let g:jsx_ext_required = 1
 let g:ycm_confirm_extra_conf = 0
 " let g:gitgutter_highlight_lines = 1
 
-let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = 1
 
-" let g:ycm_add_preview_to_completeopt = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1 "Not working ??"
-" let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1 "Not working ??"
+let g:ycm_autoclose_preview_window_after_completion=1
 " let g:jellybeans_overrides = {
 " \    'background': { 'guibg': '000000' },
 " \}
@@ -70,7 +70,7 @@ let g:seoul256_background = 233
 " colo seoul256
 
 if has("gui_running")
-  set guifont=Menlo:h14 columns=80 lines=40
+  set guifont=Bitstream\ Vera\ Sans\ Mono:h14 columns=80 lines=40
   silent! colo seoul256
   set linespace=4
   set guicursor+=a:blinkon0
@@ -79,7 +79,8 @@ if has("gui_running")
   set guioptions-=r  " remove right-hand scroll bar
   set guioptions-=L  " remove left-hand scroll bar
   " set guioptions-=e  " remove graphical tabs
-  set guicursor=i-ci:ver40
+  set guicursor=i-ci:ver45
+
   " hi Cursor guibg=limegreen guifg=black
   hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
   " hi Normal ctermbg=0 guibg=#000000
@@ -115,6 +116,7 @@ set synmaxcol=1000
 " set clipboard=unnamed
 " set nocompatible
 set nu
+set nocursorline
 set laststatus=2
 set showmatch
 set numberwidth=1
@@ -166,8 +168,8 @@ nnoremap <leader>O O<esc>
 " ----------------------------------------------------------------------------
 " Tabs
 " ----------------------------------------------------------------------------
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
+nnoremap ]w :tabn<cr>
+nnoremap [w :tabp<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -194,6 +196,7 @@ nmap <leader>h :nohlsearch<CR>
 
 imap <C-c> <Esc>
 nmap <C-p> :FZF<CR>
+nmap <leader>p :GFiles<CR>
 nmap <C-b> :Buffers<CR>
 nmap <C-g> :GitGutterToggle<CR>
 
@@ -259,4 +262,3 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-

@@ -30,7 +30,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'tomasr/molokai'
 
 " JS Plugins
-Plug 'marijnh/tern_for_vim'
+" Plug 'marijnh/tern_for_vim'
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'isruslan/vim-es6'
 Plug 'moll/vim-node'
@@ -40,7 +40,7 @@ Plug 'chemzqm/vim-jsx-improve'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'maksimr/vim-jsbeautify'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 call plug#end()
 
 let g:incsearch#auto_nohlsearch = 1
@@ -48,7 +48,7 @@ let g:jsx_ext_required = 1
 let g:ycm_confirm_extra_conf = 0
 " let g:gitgutter_highlight_lines = 1
 
-let g:gitgutter_enabled = 1
+let g:gitgutter_enabled = 0
 
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1 "Not working ??"
@@ -70,9 +70,11 @@ let g:seoul256_background = 233
 " colo seoul256
 
 if has("gui_running")
-  set guifont=Bitstream\ Vera\ Sans\ Mono:h14 columns=80 lines=40
-  silent! colo seoul256
-  set linespace=4
+  color seoul256
+  " color jellybeans
+  " set guifont=Bitstream\ Vera\ Sans\ Mono:h14 columns=120 lines=50
+  set guifont=Menlo:h12 columns=120 lines=50
+  set linespace=0
   set guicursor+=a:blinkon0
   set guioptions-=m  " remove menu bar
   set guioptions-=T  " remove toolbar
@@ -80,7 +82,6 @@ if has("gui_running")
   set guioptions-=L  " remove left-hand scroll bar
   " set guioptions-=e  " remove graphical tabs
   set guicursor=i-ci:ver45
-
   " hi Cursor guibg=limegreen guifg=black
   hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
   " hi Normal ctermbg=0 guibg=#000000
@@ -89,29 +90,31 @@ if has("gui_running")
   " hi TabLine guifg=#ffffff guibg=#000000 ctermbg=245 ctermfg=0 cterm=NONE gui=BOLD
   " hi TabLineFill guifg=#000000 ctermbg=0 cterm=NONE gui=NONE
 else
-  silent! colo seoul256
+  set t_Co=16
+  color delek
+  " silent! colo seoul256
   hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
-  hi Normal ctermbg=0 guibg=#000000
+  " hi Normal ctermbg=0 guibg=#000000
   " hi LineNr ctermfg=3
   " hi Statement ctermfg=3
   " hi LineNr ctermfg=238 cterm=NONE
   " hi Cursorline ctermbg=232 cterm=NONE guibg=#303030
   " hi StatusLine ctermbg=235 ctermfg=248
   hi VertSplit ctermbg=234 ctermfg=234 guibg=#1d1d1d guifg=#1d1d1d
-  " hi TabLineSel guifg=#000000 guibg=#ffffff ctermfg=233 ctermbg=255 cterm=BOLD gui=BOLD
-  " hi TabLine guifg=#ffffff guibg=#000000 ctermbg=245 ctermfg=0 cterm=NONE gui=BOLD
-  " hi TabLineFill guifg=#000000 ctermbg=0 cterm=NONE gui=NONE
+  hi TabLineSel guifg=#000000 guibg=#ffffff ctermfg=233 ctermbg=255 cterm=BOLD gui=BOLD
+  hi TabLine guifg=#ffffff guibg=#000000 ctermbg=245 ctermfg=0 cterm=NONE gui=BOLD
+  hi TabLineFill guifg=#000000 ctermbg=0 cterm=NONE gui=NONE
   " hi Visual ctermfg=96 ctermbg=253
   " hi VisualNOS ctermfg=60 cterm=NONE
 endif
 
 " For MacVim
-set noimd
-set imi=1
-set ims=-1
+" set noimd
+" set imi=1
+" set ims=-1
 
 set modelines=2
-set synmaxcol=1000
+" set synmaxcol=1000
 
 " set clipboard=unnamed
 " set nocompatible
@@ -127,7 +130,7 @@ set viminfo+=/100
 set autoindent
 set smartindent
 set showtabline=2
-set lazyredraw
+" set lazyredraw
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 set mouse=a

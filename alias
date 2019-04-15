@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+alias mvim="/usr/local/Cellar/macvim/8.1-155/MacVim.app/Contents/bin/mvim"
+# alias vim="nvim"
+alias m="mvim"
+alias ls="ls -a"
+alias ll="ls -al"
+
+alias dl="youtube-dl --extract-audio --audio-format mp3"
+alias pgstart="postgres -D /usr/local/var/postgres"
+alias tas="tmux attach-session"
+alias be="bundle exec"
+alias dev="cd ~/code/webdev"
+alias rcs="rails console --sandbox"
+alias rc="rails console"
+alias dms="rails db:migrate:status"
+alias rr="rails routes"
+
+alias gst="git status"
+alias gc="git commit"
+alias gp="git push"
+
+alias ..='cd ..'
+alias ..2='cd ../../'
+alias ..3='cd ../../../'
+alias ..4='cd ../../../../'
+

@@ -30,6 +30,8 @@ bindkey -e
 autoload -Uz promptinit
 promptinit
 
+export PROMPT='%c $ '
+
 # make with the pretty colors
 autoload colors; colors
 
@@ -48,7 +50,9 @@ alias vim="nvim"
 alias m="mvim"
 alias ls="ls -a"
 alias ll="ls -al"
+alias gp="git push"
 alias gst="git status"
+alias gc="git commit"
 alias ..="cd .."
 alias dl="youtube-dl --extract-audio --audio-format mp3"
 alias pgstart="postgres -D /usr/local/var/postgres"
@@ -61,22 +65,22 @@ alias dms="rails db:migrate:status"
 # }}}
 
 # POWERLINE SHELL SETTINGS {{{
-function powerline_precmd() {
-    PS1="$(powerline-shell --shell zsh $?)"
-}
-
-function install_powerline_precmd() {
-  for s in "${precmd_functions[@]}"; do
-    if [ "$s" = "powerline_precmd" ]; then
-      return
-    fi
-  done
-  precmd_functions+=(powerline_precmd)
-}
-
-if [ "$TERM" != "linux" ]; then
-    install_powerline_precmd
-fi
+# function powerline_precmd() {
+#     PS1="$(powerline-shell --shell zsh $?)"
+# }
+# 
+# function install_powerline_precmd() {
+#   for s in "${precmd_functions[@]}"; do
+#     if [ "$s" = "powerline_precmd" ]; then
+#       return
+#     fi
+#   done
+#   precmd_functions+=(powerline_precmd)
+# }
+# 
+# if [ "$TERM" != "linux" ]; then
+#     install_powerline_precmd
+# fi
 # }}}
 
 # Ctrl+w DELETE WORD {{{

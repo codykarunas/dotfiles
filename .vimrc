@@ -5,15 +5,17 @@ syntax on
 " Vim-plug
 call plug#begin()
 Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer' }
+" Plug 'w0rp/ale'
+
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-bundler'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/goyo.vim'
-Plug 'junegunn/vim-emoji'
 
 Plug 'docunext/closetag.vim'
 Plug 'raimondi/delimitmate'
@@ -33,6 +35,7 @@ Plug 'tomasr/molokai'
 " Plug 'marijnh/tern_for_vim'
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'isruslan/vim-es6'
+Plug 'leafgarland/typescript-vim'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -40,7 +43,7 @@ Plug 'chemzqm/vim-jsx-improve'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'maksimr/vim-jsbeautify'
-" Plug 'w0rp/ale'
+
 call plug#end()
 
 let g:incsearch#auto_nohlsearch = 1
@@ -61,7 +64,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 " seoul256 (dark):
 "   Range:   233 (darkest) ~ 239 (lightest)
 "   Default: 237
-let g:seoul256_background = 233
+" let g:seoul256_background = 233
 
 " seoul256 (light):
 "   Range:   252 (darkest) ~ 256 (lightest)
@@ -70,12 +73,13 @@ let g:seoul256_background = 233
 " colo seoul256
 
 if has("gui_running")
-  color seoul256
+  color hybrid
   " color jellybeans
   " set guifont=Bitstream\ Vera\ Sans\ Mono:h14 columns=120 lines=50
-  set guifont=Menlo:h12 columns=120 lines=50
+  " set guifont=Source\ Code\ Pro:h14 columns=120 lines=50
+  set guifont=Lucida\ Sans\ Typewriter\ Regular:h14 columns=120 lines=50
   set linespace=0
-  set guicursor+=a:blinkon0
+  " set guicursor+=a:blinkon0
   set guioptions-=m  " remove menu bar
   set guioptions-=T  " remove toolbar
   set guioptions-=r  " remove right-hand scroll bar
@@ -89,11 +93,12 @@ if has("gui_running")
   " hi TabLineSel guifg=#000000 guibg=#ffffff ctermfg=233 ctermbg=255 cterm=BOLD gui=BOLD
   " hi TabLine guifg=#ffffff guibg=#000000 ctermbg=245 ctermfg=0 cterm=NONE gui=BOLD
   " hi TabLineFill guifg=#000000 ctermbg=0 cterm=NONE gui=NONE
+  hi CursorLine guibg=#101010
 else
   set t_Co=16
-  color delek
-  " silent! colo seoul256
+  set bg=light
   hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
+  hi MatchParen ctermfg=white ctermbg=magenta
   " hi Normal ctermbg=0 guibg=#000000
   " hi LineNr ctermfg=3
   " hi Statement ctermfg=3
@@ -108,19 +113,13 @@ else
   " hi VisualNOS ctermfg=60 cterm=NONE
 endif
 
-" For MacVim
-" set noimd
-" set imi=1
-" set ims=-1
-
-set modelines=2
-" set synmaxcol=1000
-
+" set modelines=2
 " set clipboard=unnamed
 " set nocompatible
-set nu
+set number
+set numberwidth=5
+set laststatus=0
 set nocursorline
-set laststatus=2
 set showmatch
 set numberwidth=1
 set backspace=indent,eol,start
@@ -128,8 +127,8 @@ set noswapfile
 set rtp+=/usr/local/opt/fzf
 set viminfo+=/100
 set autoindent
-set smartindent
-set showtabline=2
+" set smartindent
+set showtabline=1
 " set lazyredraw
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
@@ -151,7 +150,7 @@ set nostartofline
 
 " Shift-tab on GNU screen
 " http://superuser.com/questions/195794/gnu-screen-shift-tab-issue
-set t_kB=[Z
+" set t_kB=[Z
 
 " Leader
 let mapleader = ","
@@ -180,8 +179,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" vipga=
-" gaip=
+nmap <leader>b :Buffers<CR>
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -229,10 +227,10 @@ if &term =~ '^screen'
   execute "set <xLeft>=\e[1;*D"
 endif
 
-" nnoremap <silent> <S-Down> :resize +2<CR>
-" nnoremap <silent> <S-Up> :resize -2<CR>
-" nnoremap <silent> <S-Right> :vertical resize -2<CR>
-" nnoremap <silent> <S-Left> :vertical resize +2<CR>
+nnoremap <silent> <S-Down> :resize +2<CR>
+nnoremap <silent> <S-Up> :resize -2<CR>
+nnoremap <silent> <S-Right> :vertical resize -2<CR>
+nnoremap <silent> <S-Left> :vertical resize +2<CR>
 
 " Ref: Rename Current File (Gary Bernhardt)
 function! RenameFile()
@@ -265,3 +263,13 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" Remove whitspace
+function! Strip()
+  %s/\s\+$//e
+endfunction
+
+" Change hash rockets (:x => a) to new Ruby syntax (x: a)
+function! RocketFix()
+  %s/:\([^=,'"]*\) =>/\1:/gc
+endfunction

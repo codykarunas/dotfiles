@@ -1,7 +1,12 @@
 #!/usr/bin/bash
-alias mvim="/usr/local/Cellar/macvim/8.1-155/MacVim.app/Contents/bin/mvim"
+# alias rake_test="rake test TEST=test/models/purchase_test.rb TESTOPTS='--name=purchase_test.rb -v'"
+alias tc="cd $HOME/Sites/dev/tomatocan"
+alias be="bundle exec"
+alias sites="cd $HOME/Sites"
+alias dev="cd $HOME/Sites/dev"
 # alias vim="nvim"
-alias m="mvim"
+# alias mvim="/usr/local/Cellar/macvim/8.1-155/MacVim.app/Contents/bin/mvim"
+alias vim="/usr/local/Cellar/macvim/8.1-155/bin/vim"
 alias ls="ls -a"
 alias ll="ls -al"
 
@@ -9,18 +14,32 @@ alias dl="youtube-dl --extract-audio --audio-format mp3"
 alias pgstart="postgres -D /usr/local/var/postgres"
 alias tas="tmux attach-session"
 alias be="bundle exec"
-alias dev="cd ~/code/webdev"
+
 alias rcs="rails console --sandbox"
 alias rc="rails console"
 alias dms="rails db:migrate:status"
 alias rr="rails routes"
+alias pryrails="pry -r ./config/environment"
 
 alias gst="git status"
 alias gc="git commit"
 alias gp="git push"
+alias gco="git checkout"
+alias symlink-gemfile="ln -s $HOME/Sites/dev/Gemfile $HOME/Sites/dev/tomatocan/"
+alias cptv-master="https://github.com/ece106/tomatocan.git"
 
 alias ..='cd ..'
 alias ..2='cd ../../'
 alias ..3='cd ../../../'
 alias ..4='cd ../../../../'
+
+alias lynda="cd $HOME/code/lynda"
+alias udemy="cd $HOME/code/udemy"
+alias pdfs="cd $HOME/Downloads/pdfs"
+alias o="open"
+alias aws-connect="ssh -i ~/Desktop/master-key-pai.pem ec2-user@54.172.116.241"
+
+# REF: https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 

@@ -1,9 +1,9 @@
 [user]
-  name = Cody Karunas
+  name = codykarunas
   email = codykarunas@gmail.com
 
 [core]
-  editor = vim
+  editor = mvim
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
 
@@ -48,3 +48,12 @@
   # log aliases
   l = log --pretty=oneline
   lg = log --oneline --graph --decorate
+[filter "lfs"]
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+[diff]
+	tool = mvimdiff
+[merge]
+  tool = vimdiff

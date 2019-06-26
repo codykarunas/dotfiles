@@ -9,6 +9,8 @@
 call plug#begin()
 " Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer' }
 " Plug 'w0rp/ale'
+" Plug 'scrooloose/nerdtree'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -18,8 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'docunext/closetag.vim'
 Plug 'raimondi/delimitmate'
-" Plug 'scrooloose/nerdtree'
-Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
 Plug 'haya14busa/incsearch.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'w0ng/vim-hybrid'
@@ -30,18 +31,19 @@ Plug 'tomasr/molokai'
 " Plug 'othree/javascript-libraries-syntax.vim'
 " Plug 'isruslan/vim-es6'
 " Plug 'leafgarland/typescript-vim'
-Plug 'moll/vim-node'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'chemzqm/vim-jsx-improve'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'maksimr/vim-jsbeautify'
+" Plug 'moll/vim-node'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+" Plug 'chemzqm/vim-jsx-improve'
+" Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'jelera/vim-javascript-syntax'
+" Plug 'maksimr/vim-jsbeautify'
 call plug#end()
 
 " ==========================================
 " Vim Plugin Options/Settings
 " ==========================================
+let g:gitgutter_enabled = 0
 " let g:incsearch#auto_nohlsearch = 1
 " let g:jsx_ext_required = 1
 " let g:ycm_confirm_extra_conf = 0
@@ -75,8 +77,8 @@ if has("gui_running")
   set guioptions-=e  " remove graphical tabs
   set guicursor=i-ci:ver45
   hi Cursor guibg=red guifg=white
-  " hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
   hi VertSplit ctermbg=236 ctermfg=0 guibg=#1d1d1d guifg=#1d1d1d
+  " hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
 else
   hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
 endif
@@ -159,9 +161,8 @@ command! E e
 command! Wa wa
 command! Wq wq
 
+nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap ; :
-
-nnoremap <leader>g :Git branch<CR>
 
 " Open new line below and above current line
 nnoremap <leader>o o<esc>
@@ -188,6 +189,10 @@ nmap <leader>h :nohlsearch<CR>
 nnoremap ]w :tabn<cr>
 nnoremap [w :tabp<cr>
 
+" Buffers
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
 imap <C-c> <Esc>
 nmap <C-p> :FZF<CR>
 nmap <leader>p :GFiles<CR>
@@ -208,6 +213,9 @@ nnoremap <silent> <S-Down> :resize +2<CR>
 nnoremap <silent> <S-Up> :resize -2<CR>
 nnoremap <silent> <S-Right> :vertical resize -2<CR>
 nnoremap <silent> <S-Left> :vertical resize +2<CR>
+
+
+
 
 " ==========================================
 " Functions
@@ -270,6 +278,10 @@ function! ToggleNumberLine()
 endfunction
 nmap <leader>n :call ToggleNumberLine()<CR>
 
+
+" ==========================================
+" Auto Commands
+" ==========================================
 augroup Indentation
   autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 softtabstop=4
 augroup END
@@ -280,3 +292,4 @@ augroup VimStartup
         \ (v:servername =~ 'GVIM\d*' || v:servername == "")
         \ | e . | endif
 augroup END
+

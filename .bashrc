@@ -2,9 +2,6 @@
 
 source $HOME/.dotfiles/alias
 
-# export PATH="/usr/local/opt/ncurses/bin:$PATH"
-
-# export PATH=$PATH:/usr/local/bin
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.rbenv/bin:$PATH
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

@@ -1,7 +1,6 @@
 #
 # Author: Kowit Karunas
 # ZSHRC
-#
 
 # export PATH="/usr/local/sbin:$PATH"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -11,6 +10,8 @@ export PATH="/usr/local/sbin:$PATH"
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+source $HOME/.alias
+source ~/.zsh/zsh-git-prompt/zshrc.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.zprofile
 
@@ -34,8 +35,9 @@ autoload -Uz promptinit
 promptinit
 
 # export PROMPT='%n@%m:%c > '
-export PROMPT='%F{blue}%B%c%b%f $ '
-# export PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f %# '
+# export PROMPT='%F{blue}%B%c%b%f $ '
+# export PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f $(git_super_status) %# '
+# export PROMPT='%F{blue}%B%~%b%f $(git_super_status) %# '
 
 # make with the pretty colors
 autoload colors; colors
@@ -49,16 +51,16 @@ zstyle ':completion:*:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm 
 zstyle ':completion:*:ssh:*' tag-order hosts users
 zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
 
-# ALIASES {{{
+# ============================================================================
+# ALIAS
+# ============================================================================
+alias tc="cd $HOME/Sites/dev/tomatocan"
 alias sites="cd $HOME/Sites"
 alias mvim="/usr/local/Cellar/macvim/8.1-155/MacVim.app/Contents/bin/mvim"
 alias m="mvim"
 alias v="vim"
 alias ls="ls -a"
 alias ll="ls -al"
-alias gp="git push"
-alias gst="git status"
-alias gc="git commit"
 alias ..="cd .."
 alias dl="youtube-dl --extract-audio --audio-format mp3"
 alias pgstart="postgres -D /usr/local/var/postgres"
@@ -69,37 +71,41 @@ alias rcs="rails console --sandbox"
 alias rc="rails console"
 alias dms="rails db:migrate:status"
 alias aws-connect="ssh -i ~/Desktop/master-key-pai.pem ec2-user@54.172.116.241"
-# }}}
 
+# ============================================================================
 # POWERLINE SHELL SETTINGS {{{
-# function powerline_precmd() {
-#     PS1="$(powerline-shell --shell zsh $?)"
-# }
-# 
-# function install_powerline_precmd() {
-#   for s in "${precmd_functions[@]}"; do
-#     if [ "$s" = "powerline_precmd" ]; then
-#       return
-#     fi
-#   done
-#   precmd_functions+=(powerline_precmd)
-# }
-#
-# if [ "$TERM" != "linux" ]; then
-#     install_powerline_precmd
-# fi
+# ============================================================================
+function powerline_precmd() {
+    PS1="$(powerline-shell --shell zsh $?)"
+}
+
+function install_powerline_precmd() {
+  for s in "${precmd_functions[@]}"; do
+    if [ "$s" = "powerline_precmd" ]; then
+      return
+    fi
+  done
+  precmd_functions+=(powerline_precmd)
+}
+
+if [ "$TERM" != "linux" ]; then
+    install_powerline_precmd
+fi
 
 # Ctrl+w DELETE WORD {{{
 # REF: https://unix.stackexchange.com/questions/250690/how-to-configure-ctrlw-as-delete-word-in-zsh
-my-backward-delete-word() {
-  local WORDCHARS=${WORDCHARS/\//}
-  zle backward-delete-word
-}
-
-zle -N my-backward-delete-word
-bindkey '^W' my-backward-delete-word
+# my-backward-delete-word() {
+#   local WORDCHARS=${WORDCHARS/\//}
+#   zle backward-delete-word
+# }
+#
+# zle -N my-backward-delete-word
+# bindkey '^W' my-backward-delete-word
 # }}}
 
+# ============================================================================
+# FZF Settings
+# ============================================================================
 # REF: https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"

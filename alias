@@ -6,7 +6,7 @@ alias sites="cd $HOME/Sites"
 alias dev="cd $HOME/Sites/dev"
 # alias vim="nvim"
 # alias mvim="/usr/local/Cellar/macvim/8.1-155/MacVim.app/Contents/bin/mvim"
-alias vim="/usr/local/Cellar/macvim/8.1-155/bin/vim"
+# alias vim="/usr/local/Cellar/macvim/8.1-155/bin/vim"
 alias ls="ls -a"
 alias ll="ls -al"
 
@@ -22,9 +22,11 @@ alias rr="rails routes"
 alias pryrails="pry -r ./config/environment"
 
 alias gst="git status"
+alias gb="git branch"
 alias gc="git commit"
 alias gp="git push"
 alias gco="git checkout"
+
 alias symlink-gemfile="ln -s $HOME/Sites/dev/Gemfile $HOME/Sites/dev/tomatocan/"
 alias cptv-master="https://github.com/ece106/tomatocan.git"
 

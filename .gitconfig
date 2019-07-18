@@ -3,12 +3,12 @@
   email = codykarunas@gmail.com
 
 [core]
-  editor = mvim
+  editor = vim
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
 
 [color]
-  ui = auto
+  # ui = auto
 
 [color "branch"]
   current = red bold
@@ -54,6 +54,8 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
 [diff]
-	tool = mvimdiff
+  tool = vimdiff
 [merge]
   tool = vimdiff
+[pager]
+  branch = false

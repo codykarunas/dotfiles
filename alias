@@ -1,12 +1,14 @@
 #!/usr/bin/bash
-# alias rake_test="rake test TEST=test/models/purchase_test.rb TESTOPTS='--name=purchase_test.rb -v'"
+alias mvim="/Applications/MacVim.app/Contents/bin/mvim"
+alias mvimdiff="/Applications/MacVim.app/Contents/bin/mvimdiff"
+alias githelp="cat $HOME/code/git-help.txt"
+alias v="vim"
+alias nv="nvim"
+alias rt="rails test"
 alias tc="cd $HOME/Sites/dev/tomatocan"
 alias be="bundle exec"
 alias sites="cd $HOME/Sites"
 alias dev="cd $HOME/Sites/dev"
-# alias vim="nvim"
-# alias mvim="/usr/local/Cellar/macvim/8.1-155/MacVim.app/Contents/bin/mvim"
-# alias vim="/usr/local/Cellar/macvim/8.1-155/bin/vim"
 alias ls="ls -a"
 alias ll="ls -al"
 

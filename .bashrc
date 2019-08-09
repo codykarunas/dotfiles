@@ -40,7 +40,7 @@ if [ -t 1 ]; then
 fi
 
 export FZF_DEFAULT_OPTS='
---color fg:124,bg:16,hl:202,fg+:214,bg+:52,hl+:231
---color info:52,prompt:196,spinner:208,pointer:196,marker:208
---height 10% --reverse
+--color fg:188,bg:0,hl:103,fg+:222,bg+:234,hl+:104
+--color info:183,prompt:110,spinner:107,pointer:167,marker:215
+--height 10%
 '

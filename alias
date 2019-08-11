@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+alias tqtv="cd $HOME/Sites/dev/tomatocan"
+alias nvim="vim"
 alias mvim="/Applications/MacVim.app/Contents/bin/mvim"
 alias mvimdiff="/Applications/MacVim.app/Contents/bin/mvimdiff"
 alias githelp="cat $HOME/code/git-help.txt"

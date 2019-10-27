@@ -1,2 +1,3 @@
---webpacker=react
+--database=postgresql
+--webpack=react
 --skip-test

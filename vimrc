@@ -13,14 +13,15 @@ call plug#begin()
 "   Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer' }
 " endif
 " Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
 Plug 'valloric/youcompleteme', { 'do': './install.py --clang-completer' }
-Plug 'neovimhaskell/haskell-vim'
 Plug 'ervandew/supertab'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'greymd/oscyank.vim'
 Plug 'mhinz/vim-signify'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdtree'
+Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-dispatch'
@@ -34,31 +35,45 @@ Plug 'junegunn/vim-easy-align'
 Plug 'othree/html5.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
+Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'keith/swift.vim'
-Plug 'haya14busa/incsearch.vim'
+Plug 'elzr/vim-json'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'itchyny/lightline.vim'
-Plug 'wdhg/dragon-energy'
+" Plug 'haya14busa/incsearch.vim'
+" Plug 'cakebaker/scss-syntax.vim'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'itchyny/lightline.vim'
+
 " Colors
-Plug 'wesgibbs/vim-irblack'
-Plug 'aunsira/macvim-light'
-Plug 'junegunn/seoul256.vim'
 Plug 'acarapetis/vim-github-theme'
 Plug 'nanotech/jellybeans.vim'
-Plug 'tomasr/molokai'
-Plug 'vim-scripts/Gummybears'
-Plug 'rakr/vim-one'
-Plug 'jdkanani/vim-material-theme'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'ayu-theme/ayu-vim'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'mhartington/oceanic-next'
 call plug#end()
+
+let g:jsx_ext_required = 0
+let g:ale_linters = {
+\   'javascript': ['standard', 'eslint'],
+\}
+
+let g:ale_fixers = {
+  \   'javascript': ['prettier', 'eslint'],
+  \   'typescript': ['prettier', 'tslint'],
+  \   'vue': ['eslint'],
+  \   'scss': ['prettier'],
+  \   'html': ['prettier'],
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_enter = 0
+" let g:ale_lint_on_text_changed = 'never'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
+let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma none'
 
 " ============================================================================
 " Vim Plugin Options/Settings
@@ -84,34 +99,29 @@ let g:signify_disable_by_default = 1
 let g:signify_update_on_bufenter = 1
 
 " REF: https://dmerej.info/blog/post/lets-have-a-pint-of-vim-ale/
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_enter = 0
 " let g:netrw_liststyle = 3
 " let g:netrw_banner = 0
 
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
 syntax on
-
-" seoul256 (dark):
-"   Range:   233 (darkest) ~ 239 (lightest)
-"   Default: 237
-" let g:seoul256_background = 233
-" colo seoul256
-
-" seoul256 (light):
-"   Range:   252 (darkest) ~ 256 (lightest)
-"   Default: 253
-" let g:seoul256_background = 256
-" colo seoul256
 
 " ============================================================================
 " GUI vs Console Vim Settings/Options
 " ============================================================================
+" let g:jellybeans_overrides = {
+"       \    'background': { 'guibg': '000000' },
+"       \}
 if has("gui_running")
   color jellybeans
-  set guifont=Ubuntu\ Mono:h16
-  " set guifont=Monaco:h14
-  set linespace=5
+  set linespace=2
+  set guifont=Monaco:h14
   set guicursor+=a:blinkon0
   set guioptions-=m  " remove menu bar
   set guioptions-=T  " remove toolbar
@@ -131,38 +141,35 @@ if has("gui_running")
   " hi VertSplit ctermbg=236 ctermfg=0 guibg=#1d1d1d guifg=#1d1d1d
   " hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
 else
-  let g:jellybeans_overrides = {
-        \    'background': { 'guibg': '000000' },
-        \}
-
   set bg=light
 
-  " let g:oceanic_next_terminal_bold = 1
-  " let g:oceanic_next_terminal_italic = 1
-  " color OceanicNext
-  " let ayucolor="light"  " for light version of theme
-  " let ayucolor="mirage" " for mirage version of theme
-  " let ayucolor="dark"   " for dark version of theme
-  " color ayu
-  " Italics for my favorite color scheme
-  " let g:palenight_terminal_italics=1
-  " set background=dark
-  " color palenight
+  " hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=235
+  " hi Visual guibg=#262D51 ctermbg=60
+  " hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
+  " hi WildMenu guifg=black guibg=#cae682 ctermfg=0 ctermbg=195
+  " hi PmenuSbar guifg=black guibg=white ctermfg=0 ctermbg=15
+  " hi Error gui=undercurl ctermfg=203 ctermbg=none cterm=underline guisp=#FF6C60
+  " hi ErrorMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
+  " hi WarningMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
+  " hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
+
+  " hi CursorLineNr cterm=NONE
   " For True Colors in TMUX
-  " let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  " let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
   " ============================================================================
   " Colors
   " ============================================================================
+  " hi Normal ctermbg=0 guibg=#000000
+  " hi LineNr ctermbg=0 guibg=#000000
+  " hi NonText ctermbg=0 guibg=#000000
   " hi Visual ctermbg=236 cterm=NONE
   " hi StatusLine ctermbg=235 ctermfg=255
   " hi CursorLine guibg=#101010 ctermbg=233
   " hi ColorColumn ctermbg=234 cterm=NONE
   " hi Search ctermbg=yellow ctermfg=234  cterm=BOLD
-  " hi VertSplit ctermfg=235 ctermbg=235
-  " hi TabLineFill ctermfg=0 cterm=NONE
-  " hi TabLine     ctermbg=0 ctermbg=240 cterm=NONE
-  " hi TabLineSel  ctermfg=0 ctermbg=250 cterm=NONE
+  hi VertSplit ctermfg=235 ctermbg=235
+  hi TabLineFill ctermfg=0 cterm=NONE
+  hi TabLine     ctermbg=0 ctermbg=240 cterm=NONE
+  hi TabLineSel  ctermfg=0 ctermbg=250 cterm=NONE
   " hi SpecialKey ctermbg=red ctermfg=white guifg=white guibg=red
   " hi Pmenu    ctermbg=252 ctermfg=darkblue
   " hi PmenuSel ctermbg=magenta ctermfg=0
@@ -187,7 +194,12 @@ endif
 " ============================================================================
 " Settings
 " ============================================================================
+
+" If installed using Homebrew
+" set rtp+=/usr/local/opt/fzf
+
 " General Settings
+set encoding=UTF-8
 set hlsearch
 set showcmd
 set softtabstop=2
@@ -199,8 +211,8 @@ set noswapfile
 set viminfo+=/100
 set nocompatible
 set scrolloff=5
-set synmaxcol=500
 set mouse=a
+" set synmaxcol=500
 
 " Tabs/Spacing/Indentation
 " Expand tabs, but set shiftwidth and softtabstop to 2.  This allows vim
@@ -212,21 +224,18 @@ set smartindent
 " Number Line
 set number
 set norelativenumber
-set numberwidth=5
 
 " Whitespace
-set nolist
+set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 set laststatus=2
 set showmatch
 set showtabline=1
 set lazyredraw
-
 set virtualedit=block
 set nojoinspaces
 set clipboard=unnamed
-
 set splitright
 set splitbelow
 set nowrap
@@ -252,10 +261,10 @@ let mapleader = ","
 
 " INCSEARCH
 set hlsearch
-let g:incsearch#auto_nohlsearch = 1
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" let g:incsearch#auto_nohlsearch = 1
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
 nnoremap <leader>rt :Dispatch rails test %<CR>
 nnoremap <leader>a :ALEToggleBuffer<CR>
@@ -323,6 +332,7 @@ imap <C-c> <Esc>
 nmap <C-p> :FZF<CR>
 nmap <C-b> :Buffers<CR>
 nmap <C-g> :GitGutterToggle<CR>
+nmap <leader>p :GFiles<CR>
 
 nnoremap <silent> <C-h> <<
 nnoremap <silent> <C-l> >>
@@ -410,11 +420,11 @@ if has("autocmd")
 endif
 
 " NERDTree Settings
-" nnoremap <C-\> :NERDTreeToggle<CR>
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree
-" let g:NERDTreeDirArrowExpandable = '▸'
-" let g:NERDTreeDirArrowCollapsible = '▾'
+nnoremap <C-\> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " ----------------------------------------------------------------------------
 " Remove whitspace

@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-alias v="nvim"
 alias tqtv="cd $HOME/Sites/dev/tomatocan"
 alias mvim="/Applications/MacVim.app/Contents/bin/mvim"
 alias githelp="cat $HOME/code/git-help.txt"
@@ -45,4 +44,3 @@ alias aws-connect="ssh -i ~/Desktop/master-key-pai.pem ec2-user@54.172.116.241"
 # REF: https://github.com/junegunn/fzf/wiki/Configuring-shell-key-bindings
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-
